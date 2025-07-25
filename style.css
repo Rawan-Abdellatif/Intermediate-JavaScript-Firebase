@@ -1,7 +1,7 @@
 /* General Body Styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #667eea, #764ba2);
+    background: linear-gradient(to right, #b5b6b8, #949196);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +47,7 @@ body {
   button {
     width: 100%;
     padding: 12px;
-    background-color: #667eea;
+    background-color: #3b3b3c;
     color: white;
     font-weight: bold;
     border: none;
@@ -59,7 +59,7 @@ body {
   }
   
   button:hover {
-    background-color: #5a67d8;
+    background-color: #c0c1c6;
   }
   /* #login-form-loginpage {
     background-color: #fff;

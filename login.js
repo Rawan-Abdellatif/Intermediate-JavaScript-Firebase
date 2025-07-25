@@ -81,7 +81,7 @@ fetch("https://cors-anywhere.herokuapp.com/https://favqs.com/api/qotd")
 
             document.getElementById("output").innerHTML = `
               <h2> Happy Birthday, ${name}!</h2>
-              <p>Wishing You All the Best From</p>
+              <p>Wishing You All the Best </p>
               <p> From Rawan Abdellatif (WIT - Web Developer)</p>
                <p>"${quoteText}"</p>
                <p> ${quoteAuthor }</p>

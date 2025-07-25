@@ -1,27 +1,30 @@
-// Firebase config (same as before)
+// Firebase Config
 const firebaseConfig = {
-    apiKey: "AIzaSyBQmvpgvOZBw5JVWtNipPjhiR3ktgE_KQg",
-    authDomain: "intermediate-jscript-firebase.firebaseapp.com",
-    databaseURL: "https://intermediate-jscript-firebase-default-rtdb.firebaseio.com",
-    projectId: "intermediate-jscript-firebase",
-    storageBucket: "intermediate-jscript-firebase.appspot.com",
-    messagingSenderId: "426179941894",
-    appId: "1:426179941894:web:55eb00e0d9751f379ed587"
-  };
-  
-  firebase.initializeApp(firebaseConfig);
-  
-  const auth = firebase.auth();
-  const db = firebase.database();
-  
+  apiKey: "AIzaSyBQmvpgvOZBw5JVWtNipPjhiR3ktgE_KQg",
+  authDomain: "intermediate-jscript-firebase.firebaseapp.com",
+  databaseURL: "https://intermediate-jscript-firebase-default-rtdb.firebaseio.com",
+  projectId: "intermediate-jscript-firebase",
+  storageBucket: "intermediate-jscript-firebase.appspot.com",
+  messagingSenderId: "426179941894",
+  appId: "1:426179941894:web:55eb00e0d9751f379ed587"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Create references to Firebase Authentication and Realtime Database
+const auth = firebase.auth();
+const db = firebase.database();
+
+
 
 
 function daysUntilBirthday(birthdateInput) {
   const dob = new Date(birthdateInput);
-  if (isNaN(dob.getTime())) {
-    console.error("Invalid birthdate:", birthdateInput);
-    return null;
-  }
+  // if (isNaN(dob.getTime())) {
+  //   console.error("Invalid birthdate:", birthdateInput);
+  //   return null;
+  // }
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -29,9 +32,9 @@ function daysUntilBirthday(birthdateInput) {
   const dobThisYear = new Date(dob);
   dobThisYear.setFullYear(today.getFullYear());
   dobThisYear.setHours(0, 0, 0, 0);
-  console.log("Today:", today.toISOString());
-  console.log("Birthday this year:", dobThisYear.toISOString());
+
   
+
   if (dobThisYear < today) {
     dobThisYear.setFullYear(today.getFullYear() + 1);
       console.log("Is birthday passed?", dobThisYear < today);
@@ -67,31 +70,31 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
       }
 
       if (diffDays === 0) {
-        // Birthday is today, fetch random quote from type.fit
-        fetch("https://type.fit/api/quotes")
-          .then(res => res.json())
-          .then(quotes => {
-            // Pick a random quote
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const quote = quotes[randomIndex];
+fetch("https://cors-anywhere.herokuapp.com/https://favqs.com/api/qotd")
+  .then(res => {
+    if (!res.ok) throw new Error("Network response was not ok");
+    return res.json();
+  })
+  .then(data => {
+    const quoteText = data.quote.body;
+    const quoteAuthor = data.quote.author;
 
             document.getElementById("output").innerHTML = `
-              <h2>🎉 Happy Birthday, ${name}!</h2>
-              <p>"${quote.text}"<br>— ${quote.author || "Unknown"}</p>
+              <h2> Happy Birthday, ${name}!</h2>
+              <p>Wishing You All the Best From</p>
+              <p> From Rawan Abdellatif (WIT - Web Developer)</p>
+               <p>"${quoteText}"</p>
+               <p> ${quoteAuthor }</p>
+             </p>
             `;
           })
-          .catch(() => {
-            document.getElementById("output").innerHTML = `
-              <h2>🎉 Happy Birthday, ${name}!</h2>
-              <p>Have a wonderful day!</p>
-            `;
-          });
+         .catch((err) => console.error("Failed to fetch quote", err));
+
       } else {
         // Not birthday, show days left
         document.getElementById("output").innerHTML = `
           <h3>Hi ${name}!</h3>
-          <p>🎈 ${diffDays} day${diffDays > 1 ? "s" : ""} left until your birthday!</p>
-        `;
+<p>Rawan Abdellatif says: There are ${diffDays} day(s) left until your birthday!</p>         `;
       }
     })
     .catch(error => {
